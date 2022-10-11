@@ -1,20 +1,22 @@
 import numpy as np
+
 import ga
 
 
 def main():
     # entradas da equação
     equation_inputs = [4, -2, 3.5, 5, -11, -4.7]
+
     # número de pesos a otimizar
     num_weights = 6
 
     sol_per_pop = 8
 
     # população tem sol_per_pop cromossomos com num_weights gens
-    pop_size = (sol_per_pop, num_weights)
+    population_size = (sol_per_pop, num_weights)
 
     # População inicial
-    new_population = np.random.uniform(low=-4.0, high=4.0, size=pop_size)
+    new_population = np.random.random_integers(low=0, high=1, size=population_size)
 
     # Algoritmo genético
     num_generations = 100
@@ -22,9 +24,10 @@ def main():
 
     for generation in range(num_generations):
         print(f"Geração: {generation}")
+        print(f"POPULACAO: {new_population}")
 
         # medir o ‘fitness’ de cada cromossomo na população
-        fitness = ga.cal_pop_fitness(equation_inputs, new_population)
+        fitness = ga.cal_pop_fitness(new_population)
 
         print("Valores de fitness:")
         print(fitness)
@@ -37,8 +40,9 @@ def main():
 
         # formar a próxima geração usando crossover
         offspring_crossover = ga.crossover(parents, offspring_size=(
-            pop_size[0] - parents.shape[0], num_weights
+            population_size[0] - parents.shape[0], num_weights
         ))
+
         print("Resultado do crossover:")
         print(offspring_crossover)
 

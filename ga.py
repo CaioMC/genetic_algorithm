@@ -3,11 +3,43 @@ import sys
 import numpy as np
 
 
-def cal_pop_fitness(equation_inputs, pop):
+def cal_pop_fitness(population):
     # Cálculo do ‘fitness’ de cada solução na população atual
     # A função ‘fitness’ calcula a soma dos produtos entre cada
     # entrada e seu peso correspondente
-    return np.sum(pop * equation_inputs, axis=1)
+
+    valuesTable = {
+        0: [15, 15],
+        1: [3, 10],
+        2: [2, 10],
+        3: [5, 5],
+        4: [9, 5],
+        5: [20, 17]
+    }
+
+    population_with_points = []
+
+
+
+    for chromosomes in range(population):
+        chromosomes_with_pointes = []
+        weight = 0
+
+        for gene in range(5):
+            if chromosomes[gene] == 0:
+                chromosomes_with_pointes.append(0)
+                continue
+
+            weightByPoint = valuesTable[gene]
+            weight = weight + weightByPoint[0]
+
+            if weight > 30:
+                chromosomes_with_pointes[0] = -9999999
+            chromosomes_with_pointes.append(weightByPoint[1])
+
+        population_with_points.append(chromosomes_with_pointes)
+
+    return np.sum(population_with_points, axis=1)
 
 
 def select_mating_pool(pop, fitness, num_parents):
