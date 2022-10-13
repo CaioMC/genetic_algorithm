@@ -58,7 +58,7 @@ def main():
         best_result = np.max(np.sum(new_population*equation_inputs, axis=1))
         print(f"Melhor resultado depois da geração {generation}: {best_result}")
 
-    fitness = ga.cal_pop_fitness(equation_inputs, new_population)
+    fitness = ga.cal_pop_fitness(new_population)
     best_match_idx = np.where(fitness == np.max(fitness))
 
     print("Melhor solução: ", new_population[best_match_idx, :])

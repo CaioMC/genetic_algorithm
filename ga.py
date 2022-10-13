@@ -33,7 +33,7 @@ def cal_pop_fitness(population):
             weight = weight + weightByPoint[0]
 
             if weight > 30:
-                chromosomes_with_pointes[0] = 0
+                chromosomes_with_pointes[0] = -9999999
 
             chromosomes_with_pointes.append(weightByPoint[1])
 
@@ -44,7 +44,7 @@ def cal_pop_fitness(population):
 
 def select_mating_pool(pop, fitness, num_parents):
     # Selecionar os melhores indivíduos na geração atual
-    # para seren pais para cruzamento
+    # para serem pais para cruzamento
     parents = np.empty((num_parents, pop.shape[1]))
 
     for parent_num in range(num_parents):
@@ -84,7 +84,7 @@ def mutation(offspring_crossover, mutation_rate=0.3):
         if np.random.random() < mutation_rate:
             # O valor aleatório a ser adicionado
             random_idx = np.random.randint(0, offspring_crossover.shape[1])
-            random_value = np.random.uniform(-1.0, 1.0, 1)
-            offspring_crossover[idx, random_idx] = offspring_crossover[idx, random_idx] + random_value
+            random_value = np.random.randint(2)
+            offspring_crossover[idx, random_idx] = random_value
 
     return offspring_crossover
