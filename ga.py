@@ -19,22 +19,22 @@ def cal_pop_fitness(population):
 
     population_with_points = []
 
-
-
-    for chromosomes in range(population):
+    for i in range(len(population)):
         chromosomes_with_pointes = []
         weight = 0
 
-        for gene in range(5):
-            if chromosomes[gene] == 0:
+        for j in range(6):
+
+            if population[i][j] == 0:
                 chromosomes_with_pointes.append(0)
                 continue
 
-            weightByPoint = valuesTable[gene]
+            weightByPoint = valuesTable[j]
             weight = weight + weightByPoint[0]
 
             if weight > 30:
-                chromosomes_with_pointes[0] = -9999999
+                chromosomes_with_pointes[0] = 0
+
             chromosomes_with_pointes.append(weightByPoint[1])
 
         population_with_points.append(chromosomes_with_pointes)
